@@ -65,3 +65,28 @@ class TwentyPercentDiscount extends Discount {
 
 let disco1: Discount = new TwentyPercentDiscount()
 let disco2: TwentyPercentDiscount = new Discount(true, 0.3)
+
+/**
+ * Interfaces and types are incredibly similar. Using interface
+ * allows for declaration merging, which multiple declarations
+ * are possible in one file, and they'll all be merged.
+ * 
+ * With a namespace declaration and an interface for Window, a
+ * custom field can be added to it, without overwriting anything else.
+ */
+declare global {
+  interface Window {
+    isDevelopment: boolean
+  }
+}
+
+/**
+ * TypeScript also has public and private keywords for more object
+ * oriented programming. Use a # in front of class #properties for
+ * private too.
+ * 
+ * Abstract classes are also available to implement
+ * much of a class, but leave out details for real classes.
+ * 
+ * TypeScript even has enum for collecting a few types together.
+ */
