@@ -13,6 +13,34 @@ const deliveryAddresses = []
 
 console.log(vatPrice)
 
+type Article = {
+  title: string,
+  author: string,
+  price: number,
+  vat: number,
+  stock: number,
+  description: string
+}
+
+const bookBackup = {
+  title: 'Nine Stories',
+  author: 'J.D. Salinger',
+  price: 8.99,
+  vat: 0.06,
+  stock: 900,
+  description: 'First collection of short stories.',
+  pageCount: 109 
+}
+
+/**
+ * TypeScript is fine with this, and will drop the excess properties
+ * from any auto suggestions, but pageCount is still available at run-time.
+ *
+ * However, TypeScript will perform an excess property check on direct
+ * value assignment, and show an error.
+ */
+const book: Article = bookBackup;
+
 let deliveryAddress: any = '842 Main Street, 08863'
 
 function selectDeliveryAddress(addressOrIndex: unknown): string {
@@ -34,6 +62,21 @@ function selectDeliveryAddress(addressOrIndex: unknown): string {
     }
 
     return ''
+}
+
+/**
+ * Custom Object type definitions can be used in parameters.
+ * TypeScript will be happy with anything passed in that fits
+ * the type structure.
+ * An inline object type declaration is also possible:
+ * article: { title: string, price: number, vat: number }
+ * @param article 
+ * @returns 
+ */
+function createArticleElement(article: Article): string {
+  const title = article.title
+  const price = addVAT(article.price, article.vat)
+  return `<h2>Buy ${title} for ${price}</h2>`
 }
 
 /**
