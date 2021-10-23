@@ -1,3 +1,5 @@
+import type { Article } from './types'
+
 /**
  * Default values can help TypeScript with type inference.
  * @param price
@@ -12,15 +14,6 @@ const vatPrice = addVAT(30, 0.2)
 const deliveryAddresses = []
 
 console.log(vatPrice)
-
-type Article = {
-  title: string,
-  author: string,
-  price: number,
-  vat: number,
-  stock: number,
-  description: string
-}
 
 const bookBackup = {
   title: 'Nine Stories',
@@ -78,6 +71,42 @@ function createArticleElement(article: Article): string {
   const price = addVAT(article.price, article.vat)
   return `<h2>Buy ${title} for ${price}</h2>`
 }
+
+function isArticleInStock(article: Article) {
+  /**
+   * Check for the existence of stock since it was declared
+   * optional in the Article type declaration.
+   */
+  if (article.stock) {
+    return article.stock > 0
+  }
+  return false
+}
+
+/**
+ * TypeScript's typeof works for complex data structures, not just
+ * primitive types. Use a default Object for a quick way to get
+ * a type declaration to use.
+ */
+const defaultOrder = {
+  articles: [
+    {
+      price: 24.50
+    },
+    {
+      price: 12.80
+    }
+  ],
+  customer: {
+    name: 'Ali Hall',
+    address: {
+      state: 'PA'
+    },
+    dateOfBirth: new Date(1987, 2, 3)
+  }
+}
+
+type Order = typeof defaultOrder // Usable anywhere in the code!
 
 /**
  * Use `tsc` to compile the TypeScript into JavaScript.
