@@ -250,3 +250,10 @@ function appendEventToList(event: TechEvent) {
   const element = getTeaserListElement(event)
   list?.append(element) // This optional chaining syntax was automatically added!
 }
+
+/**
+ * Tuple types are used for destructuring the return values from a function. These
+ * are helpful with React and hooks.
+ */
+declare function useToggleState(id: number): [boolean, () => void]
+const [first, updateFirst] = useToggleState(1)
