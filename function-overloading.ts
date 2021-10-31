@@ -52,12 +52,12 @@ type SearchOverloadFunction = {
   (
     term: string,
     tags?: string[] | undefined
-  ): Promise<Result[]>;
+  ): Promise<Result[]>
   (
     term: string,
     callback: (results: Result[]) => void,
     tags?: string[] | undefined
-  ): void;
+  ): void
 }
 
 const searchWithOverloads: SearchOverloadFunction =
