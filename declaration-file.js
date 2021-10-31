@@ -1,3 +1,4 @@
+"use strict";
 //@ts-check
 /** @typedef { import('./types.d').ShipStorage }
 ShipStorage */

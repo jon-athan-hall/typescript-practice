@@ -100,6 +100,34 @@ function inputChangeHandler(this: HTMLElement) {
 }
 
 /**
+ * Tags for tagged template literals are functions with two parameters:
+ * TemplateStringsArray that contains all the strings around the @@ expressions
+ * broken up into an array, and string Array with the actual expressions
+ */
+function highlight(strings: TemplateStringsArray, ...values: string[]) {
+  let str = ''
+  strings.forEach((templ, i) => {
+    let expr = values[i]?.replace('@@start@@', '<em>').replace('@@end@@', '</em>') ?? ''
+    str += templ + expr
+  })
+  return str
+}
+
+function createResultTemplate(results: Result[]): string {
+  return `<ul>
+    ${results.map(result => highlight`<li>${result.title}</li>`)}
+  </ul>`
+}
+
+const result: Result = {
+  title: 'How to play @@start@@Too Many Bones@@end@@',
+  url: '/how-to-play-too-many-bones',
+  abstract: 'An article stepping through the rule book for Too Many Bones board game.'
+}
+
+console.log(createResultTemplate([ result ]))
+
+/**
  * Function type declarations require the order of parameters and
  * their types, but the actual names of the parameters can be different!
  * 
