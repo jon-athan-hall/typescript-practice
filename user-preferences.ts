@@ -45,3 +45,14 @@ type DeepReadOnly<Obj> = {
 function combinePreferences(defaultUP: UserPreferences, userPrefs: Optional<UserPreferences>) {
   return { ...defaultUP, ...userPrefs }
 }
+
+const prefs = combinePreferences(defaultUP, {
+  format: 'format720p'
+})
+
+/**
+ * Add the keywords "as const" after an assignment to narrow the type down
+ * to its value type.
+ * 
+ * Use a type annotation in the variable declaration as another way to narrow down the type.
+ */
