@@ -6,7 +6,7 @@ const serviceDefinition = {
   close: {}
 }
 
-declare function createService<
+function createService<
   S extends ServiceDefinition
 >(
   serviceDef: S,
